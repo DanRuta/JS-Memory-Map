@@ -2,7 +2,7 @@
 
 This library uses Google's TreeMap library to visualize the memory usage of a given object. Then, through nested Proxies, additions/deletions update the chart, making it easier to find memory leaks.
 
-Each hierarcy level is displayed in the treemap, with the memory usage of each object displayed in a tooltip.
+Each hierarchy level is displayed in the treemap, with the memory usage of each object displayed in a tooltip.
 
 <img width="100%" src="./readmeIMG.png">
 
@@ -28,6 +28,7 @@ You need to provide the google treemap library reference in the configs. If not 
 
 
 **Configurations**
+
 |  Setting | What it does | Available Configurations | Default value |
 |:-------------:| :-----:| :-----:| :---: |
 | topKey | The key for the data item at the top level ("data", in the above image). Just an aesthetic change  | Any string | "data" |
