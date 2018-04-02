@@ -112,9 +112,8 @@ class MemoryMap {
             data.__MemoryMapHasVisited = true
 
             Object.keys(data)
-            .filter(key => !data[key].__MemoryMapHasVisited)
+            .filter(key => data[key] && !data[key].__MemoryMapHasVisited)
             .forEach(key => {
-                // console.log(data, key)
                 proxy[key] = Array.isArray(data[key]) || data[key] instanceof Object ? this.makeProxy(data[key]) : data[key]
             })
 
@@ -160,7 +159,6 @@ class MemoryMap {
             Object.keys(data)
             .filter(key => key != "__MemoryMapHasVisited")
             .forEach(key => {
-                // console.log(data, key, data[key])
                 let size = 0
                 let value = data[key]
 
@@ -190,6 +188,9 @@ class MemoryMap {
                     bytes += 4
                     break
                 case "object":
+
+                    if (!obj.toString) return 0
+
                     const objClass = obj.toString().slice(8, -1)
 
                     if (objClass === "Object" || objClass === "Array") {
@@ -228,7 +229,6 @@ class MemoryMap {
                 dataRow.push(delta)
             } else {
                 this.startingValues[parentKey+thisKey] = this.proxyActive ? 0 : data.size
-                // dataRow.push(this.proxyActive ? 0 : data.size)
                 dataRow.push(0)
             }
 
