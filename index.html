@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JS Memory Map Visualizer</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="MemoryMap.js"></script>
+</head>
+<script>
+"use strict"
+window.addEventListener("load", () => {
+
+    window.testData = {
+        data1: [1, {b: "hi"}],
+        data2: {a: [2, 3, 4, 5]}
+    }
+
+    window.memoryMap = new MemoryMap(testData, {google: google, container: chart_div, calculateDeltas: true})
+    window.proxy = memoryMap.proxy
+
+    addFive.addEventListener("click", () => {
+        const addItem = i => {
+            proxy.data2.a.push(i)
+
+            if (++i<5) {
+                setTimeout(() => addItem(i), 500)
+            }
+        }
+        addItem(0)
+    })
+
+    removeThree.addEventListener("click", () => {
+        const removeItem = i => {
+            proxy.data2.a.shift()
+
+            if (++i<3) {
+                setTimeout(() => removeItem(i), 500)
+            }
+        }
+        removeItem(0)
+    })
+})
+
+</script>
+<body>
+    The original data loaded:
+    <pre>
+        testData = {
+            data1: [1, {b: "hi"}],
+            data2: {a: [2, 3, 4, 5]}
+        }
+    </pre>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+
+    <button id="addFive">Add 5 total items to testData.data2.a, once every 500ms</button>
+    <button id="removeThree">Remove 3 total items from testData.data2.a, once every 500ms</button>
+</body>
+</html>
