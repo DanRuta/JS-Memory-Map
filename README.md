@@ -10,7 +10,7 @@ Colours can optionally be used to show where the memory usage is increasing, com
 
 Do note that things get a bit slow with really large objects. To help with performance, turn down the `depth` parameter. Turning `autoUpdate` to false also helps, as the rendering process can be resource intensive.
 
-To use, create a `MemoryMap` object with your data. This will return an instance of the library. To  continue adding/reading from the data us the object stored in the `proxy` attribute, like so:
+To use, create a `MemoryMap` object with your data. This will return an instance of the library. To  continue adding/reading from the data use the object stored in the `proxy` attribute, like so:
 ```javascript
 const data = /* your data */
 
@@ -39,3 +39,5 @@ You need to provide the google treemap library reference in the configs. If not 
 | chartConfig | An object to override the google chart configurations | See [the Google documentation](https://developers.google.com/chart/interactive/docs/gallery/treemap) | undefined |
 | calculateDeltas | (Experimental) whether or not to calculate size deltas and display them using colour | true/false | false |
 
+
+When the `autoUpdate` config is set to false, you can use the `update()` function to manually update the chart.
